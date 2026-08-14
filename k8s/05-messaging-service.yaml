@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messaging-service
+  namespace: campusswap
+  labels:
+    app: messaging-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: messaging-service
+  template:
+    metadata:
+      labels:
+        app: messaging-service
+    spec:
+      containers:
+        - name: messaging-service
+          image: campusswap/messaging-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5003
+          envFrom:
+            - secretRef:
+                name: campusswap-secrets
+          volumeMounts:
+            - name: messaging-data
+              mountPath: /data
+          readinessProbe:
+            httpGet: { path: /health, port: 5003 }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+      volumes:
+        - name: messaging-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: messaging-service
+  namespace: campusswap
+spec:
+  selector:
+    app: messaging-service
+  ports:
+    - port: 5003
+      targetPort: 5003

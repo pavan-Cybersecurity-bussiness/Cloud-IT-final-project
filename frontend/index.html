@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusSwap — Buy, sell, and swap on campus</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="logo">CampusSwap</a>
+
+        <form class="search-bar" role="search">
+            <label for="search-input" class="visually-hidden">Search listings</label>
+            <input type="search" id="search-input" name="q"
+                placeholder="Search textbooks, bikes, electronics, and more...">
+        </form>
+
+        <div class="user-actions">
+            <span class="avatar">?</span>
+            <span class="greeting">Browsing as a visitor</span>
+            <a href="dashboard.html" id="nav-my-listings">My listings</a>
+            <a href="create-listing.html" id="nav-post-item" class="btn-primary">Post an item</a>
+            <a href="login.html" id="nav-auth">Log in</a>
+        </div>
+
+    </header>
+
+    <nav class="category-filters" aria-label="Filter by category">
+        <button class="filter-pill active" data-category="all">All</button>
+        <button class="filter-pill" data-category="textbooks">Textbooks</button>
+        <button class="filter-pill" data-category="electronics">Electronics</button>
+        <button class="filter-pill" data-category="furniture">Furniture</button>
+        <button class="filter-pill" data-category="bikes">Bikes &amp; transport</button>
+        <button class="filter-pill" data-category="clothing">Clothing</button>
+        <button class="filter-pill" data-category="other">Other</button>
+    </nav>
+
+    <main>
+        <!-- Populated by listings.js via the Listings service -->
+        <section class="listing-grid" id="listing-grid"></section>
+    </main>
+
+    <footer class="site-footer">
+        <p>CampusSwap — a student marketplace built for the HTW Berlin community.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/listings.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

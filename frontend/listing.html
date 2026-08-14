@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing – CampusSwap</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="logo">CampusSwap</a>
+        <form class="search-bar" role="search">
+            <label for="search-input" class="visually-hidden">Search listings</label>
+            <input type="search" id="search-input" name="q"
+                placeholder="Search textbooks, bikes, electronics, and more...">
+        </form>
+        <div class="user-actions">
+            <span class="avatar">?</span>
+            <span class="greeting">Browsing as a visitor</span>
+            <a href="dashboard.html" id="nav-my-listings">My listings</a>
+            <a href="create-listing.html" id="nav-post-item" class="btn-primary">Post an item</a>
+            <a href="login.html" id="nav-auth">Log in</a>
+        </div>
+    </header>
+
+    <main class="listing-detail" id="listing-detail">
+        <section class="detail-gallery">
+            <img class="main-image" src="assets/img/placeholder.png" alt="">
+        </section>
+
+        <section class="detail-info">
+            <h1></h1>
+            <div class="listing-meta">
+                <span class="price"></span>
+                <span class="category-tag"></span>
+            </div>
+            <p><strong>Condition:</strong> <span id="detail-condition"></span></p>
+            <p><strong>Posted:</strong> <span id="detail-posted"></span></p>
+            <p id="detail-description"></p>
+        </section>
+
+        <aside>
+            <div class="side-card" id="contact-card">
+                <h2>Contact seller</h2>
+                <p class="subtitle">Start a conversation with the seller.</p>
+                <form id="inquiry-form">
+                    <div class="form-group">
+                        <label for="inquiry-name">Your name</label>
+                        <input type="text" id="inquiry-name" name="name" placeholder="e.g., Sam K." required>
+                        <span class="error-text">Enter a name so the seller knows who's asking.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-message">Message</label>
+                        <textarea id="inquiry-message" name="message" placeholder="Is this still available?"
+                            required></textarea>
+                        <span class="error-text">Write a short message before sending.</span>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Send message</button>
+                </form>
+            </div>
+
+            <div class="side-card">
+                <h2>Seller</h2>
+                <p id="seller-name"></p>
+            </div>
+
+            <div class="side-card">
+                <h2>Report this listing</h2>
+                <form id="report-form">
+                    <div class="form-group">
+                        <label for="report-reason" class="visually-hidden">Reason</label>
+                        <select id="report-reason" required>
+                            <option value="" selected disabled>Select a reason</option>
+                            <option value="scam">Scam or fraud</option>
+                            <option value="inappropriate">Inappropriate content</option>
+                            <option value="wrong-category">Wrong category</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-secondary btn-block">Report</button>
+                </form>
+                <p class="subtitle hidden" id="report-confirm">Thanks — a moderator will review this.</p>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="site-footer">
+        <p>CampusSwap — a student marketplace built for the HTW Berlin community.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/listings.js"></script>
+    <script src="js/inquiries.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: listings-service
+  namespace: campusswap
+  labels:
+    app: listings-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: listings-service
+  template:
+    metadata:
+      labels:
+        app: listings-service
+    spec:
+      containers:
+        - name: listings-service
+          image: campusswap/listings-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5002
+          envFrom:
+            - secretRef:
+                name: campusswap-secrets
+            - configMapRef:
+                name: campusswap-config
+          volumeMounts:
+            - name: listings-data
+              mountPath: /data
+          readinessProbe:
+            httpGet: { path: /health, port: 5002 }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+      volumes:
+        - name: listings-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: listings-service
+  namespace: campusswap
+spec:
+  selector:
+    app: listings-service
+  ports:
+    - port: 5002
+      targetPort: 5002

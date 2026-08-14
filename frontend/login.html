@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in – CampusSwap</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="logo">CampusSwap</a>
+    </header>
+
+    <main>
+        <section class="form-card narrow">
+            <h1>Log in</h1>
+            <p class="subtitle">Front-end demo — no password, just picking who you are for this session.</p>
+
+            <form id="login-form" class="form-grid" novalidate>
+                <div class="form-group full-width">
+                    <label for="login-name">Name</label>
+                    <input type="text" id="login-name" name="name" placeholder="e.g., Jane D." required>
+                    <span class="error-text">Enter a name.</span>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="login-role">Role</label>
+                    <select id="login-role" name="role" required>
+                        <option value="Member" selected>Member</option>
+                        <option value="Moderator">Moderator</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Log in</button>
+                </div>
+            </form>
+
+            <p class="subtitle mt-md">
+                <a href="#" id="continue-visitor">Continue browsing as a visitor</a>
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>CampusSwap — a student marketplace built for the HTW Berlin community.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

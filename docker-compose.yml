@@ -1,0 +1,72 @@
+version: "3.9"
+
+# Local development stack. Only the gateway is exposed to the host — the
+# three backend services are only reachable from inside the Docker network,
+# the same way only the gateway would be public once this is deployed to
+# Azure or Kubernetes.
+#
+# Run:   docker compose up --build
+# Then:  open frontend/index.html in a browser (or serve it with any static
+#        file server) — it talks to http://localhost:8080/api, matching
+#        frontend/js/config.js.
+
+services:
+  auth-service:
+    build: ./backend/auth-service
+    environment:
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
+      - AUTH_DB_PATH=/data/auth.db
+    volumes:
+      - auth-data:/data
+    networks:
+      - campusswap-net
+
+  listings-service:
+    build: ./backend/listings-service
+    environment:
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
+      - LISTINGS_DB_PATH=/data/listings.db
+      - LOCAL_UPLOAD_DIR=/data/uploads
+      - PUBLIC_GATEWAY_URL=${PUBLIC_GATEWAY_URL:-http://localhost:8080}
+      # Uncomment (and set the real value in a .env file, never committed)
+      # to switch image storage from local disk to Azure Blob Storage —
+      # no code change needed, see backend/listings-service/image_storage.py
+      # - AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
+    volumes:
+      - listings-data:/data
+    networks:
+      - campusswap-net
+
+  messaging-service:
+    build: ./backend/messaging-service
+    environment:
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
+      - MESSAGING_DB_PATH=/data/messaging.db
+    volumes:
+      - messaging-data:/data
+    networks:
+      - campusswap-net
+
+  gateway:
+    build: ./backend/gateway
+    environment:
+      - AUTH_SERVICE_URL=http://auth-service:5001
+      - LISTINGS_SERVICE_URL=http://listings-service:5002
+      - MESSAGING_SERVICE_URL=http://messaging-service:5003
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth-service
+      - listings-service
+      - messaging-service
+    networks:
+      - campusswap-net
+
+networks:
+  campusswap-net:
+    driver: bridge
+
+volumes:
+  auth-data:
+  listings-data:
+  messaging-data:

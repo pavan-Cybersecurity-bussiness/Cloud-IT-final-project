@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – CampusSwap</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="logo">CampusSwap</a>
+        <form class="search-bar" role="search">
+            <label for="search-input" class="visually-hidden">Search listings</label>
+            <input type="search" id="search-input" name="q"
+                placeholder="Search textbooks, bikes, electronics, and more...">
+        </form>
+        <div class="user-actions">
+            <span class="avatar">?</span>
+            <span class="greeting">Browsing as a visitor</span>
+            <a href="dashboard.html" id="nav-my-listings">My listings</a>
+            <a href="create-listing.html" id="nav-post-item" class="btn-primary">Post an item</a>
+            <a href="login.html" id="nav-auth">Log in</a>
+        </div>
+    </header>
+
+    <main class="dashboard-wrap">
+        <h1>Dashboard</h1>
+
+        <div class="dashboard-card">
+            <div class="tabs" role="tablist">
+                <button class="tab-button active" role="tab" data-tab="my-listings">My listings</button>
+                <button class="tab-button" role="tab" data-tab="moderator-queue">Moderator queue</button>
+                <button class="tab-button" role="tab" data-tab="favorites">Favorites</button>
+                <button class="tab-button" role="tab" data-tab="messages">Messages</button>
+            </div>
+
+            <section class="tab-panel active" id="my-listings" role="tabpanel"></section>
+            <section class="tab-panel" id="moderator-queue" role="tabpanel">
+                <p class="subtitle">Review and act on reported listings.</p>
+                <div class="queue-list"></div>
+            </section>
+            <section class="tab-panel" id="favorites" role="tabpanel"></section>
+            <section class="tab-panel" id="messages" role="tabpanel"></section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>CampusSwap — a student marketplace built for the HTW Berlin community.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/listings.js"></script>
+    <script src="js/inquiries.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

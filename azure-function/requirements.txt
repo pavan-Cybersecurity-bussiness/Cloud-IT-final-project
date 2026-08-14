@@ -1,0 +1,2 @@
+azure-functions
+Pillow==10.4.0

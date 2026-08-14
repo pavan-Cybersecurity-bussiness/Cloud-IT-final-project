@@ -1,0 +1,74 @@
+[
+    {
+        "id": "1",
+        "title": "Organic Chemistry (4th ed.)",
+        "description": "Used one semester, some highlighting in the first three chapters.",
+        "category": "textbooks",
+        "price": 35,
+        "condition": "Good",
+        "sellerName": "Alex M.",
+        "datePosted": "2026-08-01",
+        "status": "active",
+        "imageUrl": "assets/img/placeholder.png"
+    },
+    {
+        "id": "2",
+        "title": "IKEA desk lamp",
+        "description": "Adjustable arm, works perfectly, just don't need it anymore.",
+        "category": "furniture",
+        "price": 12,
+        "condition": "Like New",
+        "sellerName": "Priya S.",
+        "datePosted": "2026-08-02",
+        "status": "active",
+        "imageUrl": "assets/img/placeholder.png"
+    },
+    {
+        "id": "3",
+        "title": "MacBook Air (2019, 8GB)",
+        "description": "A few scratches on the lid, battery health at 87%. Charger included.",
+        "category": "electronics",
+        "price": 320,
+        "condition": "Fair",
+        "sellerName": "Tom K.",
+        "datePosted": "2026-08-03",
+        "status": "active",
+        "imageUrl": "assets/img/placeholder.png"
+    },
+    {
+        "id": "4",
+        "title": "Road bike, size M",
+        "description": "Well maintained, new tires last month.",
+        "category": "bikes",
+        "price": 180,
+        "condition": "Good",
+        "sellerName": "Nina R.",
+        "datePosted": "2026-08-03",
+        "status": "active",
+        "imageUrl": "assets/img/placeholder.png"
+    },
+    {
+        "id": "5",
+        "title": "HTW hoodie, size L",
+        "description": "Barely worn, just doesn't fit anymore.",
+        "category": "clothing",
+        "price": 15,
+        "condition": "Like New",
+        "sellerName": "Jonas B.",
+        "datePosted": "2026-08-04",
+        "status": "active",
+        "imageUrl": "assets/img/placeholder.png"
+    },
+    {
+        "id": "6",
+        "title": "Mini fridge, 45L",
+        "description": "Perfect for a dorm room, quiet and efficient.",
+        "category": "other",
+        "price": 45,
+        "condition": "Good",
+        "sellerName": "Alex M.",
+        "datePosted": "2026-08-05",
+        "status": "active",
+        "imageUrl": "assets/img/placeholder.png"
+    }
+]

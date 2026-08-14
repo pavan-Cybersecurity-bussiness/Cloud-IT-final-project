@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: campusswap
+  labels:
+    app: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+        - name: auth-service
+          image: campusswap/auth-service:latest
+          imagePullPolicy: Never   # image is built straight into Minikube's Docker daemon — see README
+          ports:
+            - containerPort: 5001
+          envFrom:
+            - secretRef:
+                name: campusswap-secrets
+          volumeMounts:
+            - name: auth-data
+              mountPath: /data
+          readinessProbe:
+            httpGet: { path: /health, port: 5001 }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+      volumes:
+        - name: auth-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+  namespace: campusswap
+spec:
+  selector:
+    app: auth-service
+  ports:
+    - port: 5001
+      targetPort: 5001

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: campusswap-config
+  namespace: campusswap
+data:
+  # If `minikube service gateway -n campusswap --url` prints a different
+  # host:port, update this to match — it's what listings-service stamps
+  # onto locally-stored image URLs so the browser can load them back.
+  PUBLIC_GATEWAY_URL: "http://localhost:30080"
