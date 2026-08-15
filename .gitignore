@@ -16,3 +16,7 @@ venv/
 # OS/editor cruft
 .DS_Store
 .vscode/
+jwt-secret.txt
+sas-token.txt
+*.sh
+*.log

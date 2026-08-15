@@ -1,11 +1,14 @@
 // listings.js — rendering + CRUD for listings.
-//
-// CRUD functions (createListing, updateListing, removeListing,
-// reportListing, toggleFavorite) now call the Listings service through
-// api.js and return Promises instead of reading/writing localStorage
-// synchronously. The render functions are otherwise unchanged from the
-// original front-end demo — they just take the array to render as an
-// argument now, since there's no single shared in-memory array anymore.
+
+// Appends the read-only SAS token (see config.js) to Azure Blob Storage
+// URLs so <img> tags can load photos — the container itself stays
+// private; this is a scoped, revocable credential, not public access.
+function withImageAccess(url) {
+    if (url && typeof AZURE_BLOB_SAS !== 'undefined' && AZURE_BLOB_SAS && url.includes('blob.core.windows.net')) {
+        return url + (url.includes('?') ? '&' : '?') + AZURE_BLOB_SAS;
+    }
+    return url;
+}
 
 function buildListingCard(listing, favoriteIds) {
     const categoryLabel = CATEGORY_LABELS[listing.category] || listing.category;
@@ -14,7 +17,7 @@ function buildListingCard(listing, favoriteIds) {
     <article class="listing-card" data-id="${escapeHTML(listing.id)}" data-title="${escapeHTML(listing.title.toLowerCase())}" data-description="${escapeHTML(listing.description.toLowerCase())}" data-category="${escapeHTML(listing.category)}">
       <button type="button" class="favorite-btn${favActive}" title="Save to favorites">&#9825;</button>
       <a href="listing.html?id=${encodeURIComponent(listing.id)}">
-        <img src="${escapeHTML(listing.imageUrl || 'assets/img/placeholder.png')}" alt="${escapeHTML(listing.title)}">
+        <img src="${escapeHTML(withImageAccess(listing.imageUrl) || 'assets/img/placeholder.png')}" alt="${escapeHTML(listing.title)}">
         <div class="listing-info">
           <h3>${escapeHTML(listing.title)}</h3>
           <div class="listing-meta">
@@ -40,8 +43,6 @@ function renderListingGrid(listings, favoriteIds) {
     $grid.append('<p class="subtitle hidden" id="no-results">No listings match your search.</p>');
 }
 
-// Pure client-side filtering over the already-rendered cards — no extra
-// network round trip per keystroke. Unchanged from the original.
 function applyFilters() {
     const query = $('#search-input').val().trim().toLowerCase();
     const category = $('.filter-pill.active').data('category');
@@ -64,7 +65,7 @@ function applyFilters() {
 function renderListingDetail(listing) {
     if (!listing) { $('#listing-detail').html('<p class="subtitle">This listing no longer exists.</p>'); return; }
     document.title = listing.title + ' – CampusSwap';
-    $('.main-image').attr('src', listing.imageUrl || 'assets/img/placeholder.png').attr('alt', listing.title);
+    $('.main-image').attr('src', withImageAccess(listing.imageUrl) || 'assets/img/placeholder.png').attr('alt', listing.title);
     $('.detail-info h1').text(listing.title);
     $('.detail-info .price').text('€' + listing.price);
     $('.detail-info .category-tag').text(CATEGORY_LABELS[listing.category] || listing.category);
@@ -102,7 +103,7 @@ function prefillListingForm(listing) {
     $('#condition').val(listing.condition);
     $('#description').val(listing.description);
     if (listing.imageUrl && !listing.imageUrl.endsWith('placeholder.png')) {
-        $('#image-preview').attr('src', listing.imageUrl).removeClass('hidden');
+        $('#image-preview').attr('src', withImageAccess(listing.imageUrl)).removeClass('hidden');
         $('#upload-label').text('Current photo (choose a new file to replace it)');
     }
     $('h1').text('Edit listing');
@@ -117,7 +118,7 @@ function renderMyListings(listings, inquiries) {
         const count = inquiries.filter(function (i) { return i.listingId === listing.id; }).length;
         $section.append(`
       <div class="dashboard-row" data-id="${escapeHTML(listing.id)}">
-        <img src="${escapeHTML(listing.imageUrl)}" alt="">
+        <img src="${escapeHTML(withImageAccess(listing.imageUrl))}" alt="">
         <div class="row-info"><h3>${escapeHTML(listing.title)}</h3><span class="price">€${escapeHTML(String(listing.price))}</span></div>
         <span class="badge-count${count === 0 ? ' zero' : ''}">${count}</span>
         <div class="row-actions"><button class="btn-secondary btn-edit">Edit</button><button class="btn-secondary btn-delete">Delete</button></div>
@@ -134,7 +135,7 @@ function renderModeratorQueue(listings) {
         $list.append(`
       <div class="dashboard-row" data-id="${escapeHTML(listing.id)}">
         <div class="row-info"><h3>${escapeHTML(listing.title)}</h3><span class="subtitle">Reason: ${escapeHTML(listing.reportReason)}</span></div>
-        <div class="row-actions"><button class="btn-danger btn-remove">Remove</button></div>
+        <div class="row-actions"><a href="listing.html?id=${encodeURIComponent(listing.id)}" class="btn-secondary">View</a> <button class="btn-danger btn-remove">Remove</button></div>
       </div>
     `);
     });
@@ -147,7 +148,7 @@ function renderFavorites(listings) {
     listings.forEach(function (listing) {
         $section.append(`
       <div class="dashboard-row" data-id="${escapeHTML(listing.id)}">
-        <img src="${escapeHTML(listing.imageUrl)}" alt="">
+        <img src="${escapeHTML(withImageAccess(listing.imageUrl))}" alt="">
         <div class="row-info"><h3>${escapeHTML(listing.title)}</h3><span class="price">€${escapeHTML(String(listing.price))}</span></div>
         <div class="row-actions"><a href="listing.html?id=${encodeURIComponent(listing.id)}" class="btn-secondary">View</a></div>
       </div>
