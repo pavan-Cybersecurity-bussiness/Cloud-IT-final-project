@@ -82,6 +82,8 @@ exactly like any real marketplace site.
 - Site: https://campusswap-frontend.azurewebsites.net
 - API gateway: https://campusswap-gateway.azurewebsites.net
 
-kubernets(minicubes)
-<img width="205" height="42" alt="image" src="https://github.com/user-attachments/assets/999f459e-5c1b-4742-9fe0-297d1ace5925" />
+## Container orchestration evidence (Minikube)
 
+`kubectl get pods -n campusswap` showing all four services running:
+
+<img width="600" alt="kubectl get pods output showing four running pods" src="https://github.com/user-attachments/assets/999f459e-5c1b-4742-9fe0-297d1ace5925" />
