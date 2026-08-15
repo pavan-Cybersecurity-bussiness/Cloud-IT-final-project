@@ -463,7 +463,7 @@ List of requirement that had be implemented.
 16. Separation of frontend access from internal backend services through the API gateway.
 
 The resulting architecture demonstrates containerisation, microservice separation, REST communication, orchestration, cloud storage, serverless processing, and cloud hosting within a single Azure-based deployment environment.
-
+```
                          Browser
                             |
                             v
@@ -488,5 +488,6 @@ The resulting architecture demonstrates containerisation, microservice separatio
                             |
                             v
                   Thumbnail Storage
+```
 
 thank you
