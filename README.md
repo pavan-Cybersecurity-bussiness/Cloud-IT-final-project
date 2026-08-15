@@ -83,4 +83,5 @@ exactly like any real marketplace site.
 - API gateway: https://campusswap-gateway.azurewebsites.net
 
 kubernets(minicubes)
-<img width="1280" height="1024" alt="image" src="https://github.com/user-attachments/assets/e399cf16-7b46-4f88-ac41-a4df4c79604d" />
+<img width="205" height="42" alt="image" src="https://github.com/user-attachments/assets/999f459e-5c1b-4742-9fe0-297d1ace5925" />
+
