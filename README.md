@@ -78,3 +78,6 @@ immediately (browse, log in, view a listing); logging in as a Member
 reveals the other 2. All 5 are one click away from `index.html` at every
 point — which two you can see just depends on whether you're logged in,
 exactly like any real marketplace site.
+## Live deployment
+- Site: https://campusswap-frontend.azurewebsites.net
+- API gateway: https://campusswap-gateway.azurewebsites.net
