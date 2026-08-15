@@ -81,3 +81,6 @@ exactly like any real marketplace site.
 ## Live deployment
 - Site: https://campusswap-frontend.azurewebsites.net
 - API gateway: https://campusswap-gateway.azurewebsites.net
+
+kubernets(minicubes)
+<img width="1280" height="1024" alt="image" src="https://github.com/user-attachments/assets/e399cf16-7b46-4f88-ac41-a4df4c79604d" />
